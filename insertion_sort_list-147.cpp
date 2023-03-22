@@ -22,7 +22,42 @@ The following is a graphical example of the insertion sort algorithm. The partia
  * };
  */
 
+//Time complexity Q(n2)
+//Sapce complexity O(1)
+ 
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
 
+        ListNode* tmp = head;
+        ListNode* tmp2 = nullptr;
+        ListNode* prev = nullptr;
+        ListNode* tmp3 = nullptr;
+        while (tmp != nullptr) {
+            tmp2 = tmp->next;
+
+            if (prev == nullptr || prev->val >= tmp->val) {
+                tmp->next = prev;
+                prev = tmp;
+            } else {
+                tmp3 = prev;
+                while (tmp3->next != nullptr && tmp3->next->val < tmp->val) {
+                    tmp3 = tmp3->next;
+                }
+                tmp->next = tmp3->next;
+                tmp3->next = tmp;
+            }
+            tmp = tmp2;
+        }
+        head = prev;
+        return head;
+	}
+};
+
+
+
+// Second Solution
+/*
 class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
@@ -44,7 +79,7 @@ public:
         return head;
     }
 };
-
+*/
 
 //Input: head = [4,2,1,3]
 //Output: [1,2,3,4]
